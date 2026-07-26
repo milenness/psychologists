@@ -1,0 +1,162 @@
+.section {
+  padding: 78px 0 100px;
+}
+
+.heroWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  max-width: 595px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 80px;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.accent {
+  font-style: italic;
+  color: var(--green);
+}
+
+.text {
+  max-width: 510px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+
+.link {
+  display: inline-flex;
+  gap: 7.38px;
+  padding: 18px 50px;
+  background-color: var(--green);
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--main-white);
+  transition: background-color var(--main-transition);
+}
+
+.link:hover,
+.link:focus,
+.link:active {
+  background-color: var(--dark-green);
+}
+
+.arrow {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+
+.imageWrapper {
+  position: relative;
+}
+
+.heroImage {
+  width: 464px;
+  height: 526px;
+  flex-shrink: 0; 
+  max-width: none; 
+  object-fit: cover;
+}
+
+/* Зелена картка (віджет) */
+.green {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px;
+  background-color: var(--green);
+  border-radius: 20px;
+  position: absolute;
+  top: 333px;
+  left: -102px;
+}
+
+.checkMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  padding: 19.5px 17px;
+  width: 54px;
+  height: 54px;
+  background-color: var(--main-white);
+}
+
+.checkIcon {
+  display: flex;
+  color: var(--green);
+}
+
+.greenText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.greenName {
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(251, 251, 251, 0.5);
+}
+
+.greenNumber {
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--main-white);
+}
+
+/* Жовтий декоративний елемент */
+.yellow {
+  display: flex;
+  width: 48.17px;
+  height: 48.17px;
+  padding: 16px;
+  position: absolute;
+  top: 38px;
+  right: -40px;
+  background-color: #fbc75e;
+  border-radius: 10px;
+  transform: rotate(15deg);
+}
+
+.peopleIcon {
+  display: flex;
+  color: var(--main-white);
+  transform: scaleX(-1);
+}
+
+/* Фіолетовий декоративний елемент */
+.purple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 11.5px 15px;
+  background-color: #4535af;
+  border-radius: 10px;
+  position: absolute;
+  top: 185px;
+  left: -35px;
+  transform: rotate(-15deg);
+}
+
+.qIcon {
+  display: flex;
+  color: var(--main-white);
+}

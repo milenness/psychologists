@@ -1,0 +1,65 @@
+@import "modern-normalize";
+
+:root {
+	--main-text: #191a15;
+--green: #54be96;
+--dark-green : #36a379;
+--lite-green: rgba(84, 190, 150, 0.2);
+--main-white: #fbfbfb;
+--white: #FFFFFF;
+--second-text: rgba(25, 26, 21, 0.5);
+
+    --main-transition: 333ms ease-in-out;
+
+    --font-family: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 16px;
+line-height: 1.25;
+color: var(--main-text);
+  overflow-x: hidden;
+  background-color: var(--main-white);
+  letter-spacing: -0.01em;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+  outline: none;
+}
+
+button {
+ cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+max-width: 1440px;
+    padding: 0 64px;
+  margin: 0 auto;
+}
