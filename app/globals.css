@@ -25,6 +25,11 @@ color: var(--main-text);
   letter-spacing: -0.01em;
 }
 
+main {
+  position: relative;
+  overflow: hidden;
+}
+
 
 h1,
 h2,

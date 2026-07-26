@@ -9,6 +9,41 @@ import Image from "next/image";
 export default function Hero() {
     return (
       <section className={css.section}>
+        <svg
+          className={css.bgBlur}
+          width="1431"
+          height="800"
+          viewBox="0 0 1431 800"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g filter="url(#filter0_f_1_77)">
+            <circle cx="1234.5" cy="702.5" r="234.5" fill="#54BE96" />
+          </g>
+          <defs>
+            <filter
+              id="filter0_f_1_77"
+              x="0"
+              y="-532"
+              width="2469"
+              height="2469"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
+              />
+              <feGaussianBlur
+                stdDeviation="500"
+                result="effect1_foregroundBlur_1_77"
+              />
+            </filter>
+          </defs>
+        </svg>
         <div className={`${css.heroWrapper} container`}>
           <div className={css.content}>
             <h1 className={css.title}>
