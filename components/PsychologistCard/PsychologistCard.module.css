@@ -1,0 +1,67 @@
+.card {
+  padding: 24px;
+  background-color: var(--main-white);
+  display: flex;
+  gap: 24px;
+  border-radius: 24px;
+  width: 1184px;
+}
+
+.imgWrapper {
+  position: relative;
+  border: 2px solid rgba(84, 190, 150, 0.2);
+border-radius: 30px;
+padding: 10px;
+}
+
+.online {
+  position: absolute;
+  top: 9px;
+  right: 14px;
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+background-color: #38cd3e;
+border: 2.33px solid var(--main-white);
+}
+
+.contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.nameWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profession {
+  font-weight: 500;
+line-height: 1.5;
+color: var(--gray-text);
+}
+
+.name {
+  font-weight: 500;
+font-size: 24px;
+line-height: 1;
+}
+
+.rating {
+  margin-right: 32px;
+  font-weight: 500;
+line-height: 1.5;
+}
+.star {
+  color: #ffc531;
+  margin-right: 8px;
+}
+
+.price {
+margin-right: 28px;
+  font-weight: 500;
+line-height: 1.5;
+}

@@ -8,6 +8,8 @@
 --main-white: #fbfbfb;
 --white: #FFFFFF;
 --second-text: rgba(25, 26, 21, 0.5);
+--main-bg: #f3f3f3;
+--gray-text: #8a8a89;
 
     --main-transition: 333ms ease-in-out;
 
@@ -21,7 +23,7 @@ font-size: 16px;
 line-height: 1.25;
 color: var(--main-text);
   overflow-x: hidden;
-  background-color: var(--main-white);
+  background-color: var(--main-bg);
   letter-spacing: -0.01em;
 }
 

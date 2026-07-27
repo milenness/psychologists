@@ -37,7 +37,7 @@ export default function Header({
               className={`${css.navItem} ${pathname === "/catalog" ? css.active : ""}`}
             >
               <Link
-                href="/catalog"
+                href="/psychologists"
                 className={css.link}
                 aria-label="View psychologists list"
               >
