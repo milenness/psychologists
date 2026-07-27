@@ -1,0 +1,51 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(25, 26, 21, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 30px;
+  background-color: var(--main-white);
+  padding: 64px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  color: var(--main-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.closeIcon {
+  display: flex;
+}
+
+.modalTitle {
+  font-weight: 500;
+font-size: 40px;
+line-height: 1.2;
+letter-spacing: -0.02em;
+margin-bottom: 20px;
+}
+
+.modalText {
+color: rgba(25, 26, 21, 0.5);
+margin-bottom: 40px;
+max-width: 438px;
+}

@@ -4,7 +4,16 @@ import css from "./Header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Header() {
+// Описуємо, що приймає Header
+interface HeaderProps {
+  onOpenLoginModal: () => void;
+  onOpenRegisterModal: () => void;
+}
+
+export default function Header({
+  onOpenLoginModal,
+  onOpenRegisterModal,
+}: HeaderProps) {
   const pathname = usePathname();
 
   return (
@@ -18,14 +27,12 @@ export default function Header() {
           </Link>
 
           <ul className={css.navLinks}>
-            {/* Для Home просто звичайний пункт без активного класу */}
             <li className={css.navItem}>
               <Link href="/" className={css.link} aria-label="Go to home page">
                 Home
               </Link>
             </li>
 
-            {/* Активна крапка тільки тут */}
             <li
               className={`${css.navItem} ${pathname === "/catalog" ? css.active : ""}`}
             >
@@ -38,7 +45,6 @@ export default function Header() {
               </Link>
             </li>
 
-            {/* І тут */}
             <li
               className={`${css.navItem} ${pathname === "/favorites" ? css.active : ""}`}
             >
@@ -54,15 +60,23 @@ export default function Header() {
 
           <ul className={css.authList}>
             <li className={css.authItem}>
-              <Link className={css.authLogin} href="/sign-in">
+              <button
+                type="button"
+                className={css.authLogin}
+                onClick={onOpenLoginModal}
+              >
                 Login
-              </Link>
+              </button>
             </li>
 
             <li className={css.authItem}>
-              <Link className={css.authRegister} href="/sign-in">
+              <button
+                type="button"
+                className={css.authRegister}
+                onClick={onOpenRegisterModal}
+              >
                 Register
-              </Link>
+              </button>
             </li>
           </ul>
         </nav>
