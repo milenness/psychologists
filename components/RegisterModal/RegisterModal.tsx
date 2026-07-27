@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import css from "./RegisterModal.module.css";
 import { IoCloseOutline } from "react-icons/io5";
+import RegisterForm from "../RegisterForm";
 
 interface ModalProps {
   onClose: () => void;
@@ -51,6 +52,8 @@ export default function RegisterModal({ onClose }: ModalProps) {
           need some information. Please provide us with the following
           information.
         </p>
+
+      <RegisterForm onSuccess={onClose} />
       </div>
     </div>,
     document.body,

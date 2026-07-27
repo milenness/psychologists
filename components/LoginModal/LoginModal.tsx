@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import css from "./LoginModal.module.css";
 import { IoCloseOutline } from "react-icons/io5";
+import LoginForm from "@/components/LoginForm"
 
 interface ModalProps {
   onClose: () => void;
@@ -50,6 +51,8 @@ export default function LoginModal({ onClose }: ModalProps) {
           Welcome back! Please enter your credentials to access your account and
           continue your search for a psychologist.
         </p>
+
+        <LoginForm onSuccess={onClose} />
       </div>
     </div>,
     document.body,

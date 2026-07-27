@@ -1,0 +1,78 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.input {
+  padding: 16px 18px;
+  width: 100%;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  outline: none;
+  background-color: transparent;
+  transition: border-color var(--main-transtion);
+}
+
+.input:focus {
+  border-color:var(--green);
+}
+
+.passwordContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordInput {
+  padding-right: 50px;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-text);
+}
+
+.errorInput {
+  border-color: #e03636;
+}
+
+.errorText {
+  position: absolute;
+ bottom: -15px;
+  left: 4px;
+  font-size: 11px;
+  color: #e03636;
+}
+
+.submitButton {
+  background-color: var(--green);
+  padding: 16px 0;
+  color: var(--main-white);
+  border-radius: 30px; 
+  font-weight: 500;
+  transition: background-color var(--main-transtion);
+}
+
+.submitButton:hover,
+.submitButton:focus,
+.submitButton:active {
+  background-color : var(--dark-green);
+}
