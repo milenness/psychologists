@@ -5,6 +5,8 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { LuEye } from "react-icons/lu";
 import { FiEyeOff } from "react-icons/fi";
+import { loginUser } from "@/services/authService";
+import { useAuthStore } from "@/lib/store/authStore";
 import css from "./LoginForm.module.css";
 
 const LoginSchema = Yup.object().shape({
@@ -27,19 +29,47 @@ interface FormValues {
 
 export default function LoginForm({ onSuccess }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
- const handleSubmit = (
-   values: FormValues,
-   { resetForm }: FormikHelpers<FormValues>,
- ) => {
-   console.log("Form submitted values:", values);
-   resetForm();
-   if (onSuccess) onSuccess();
- };
+  const handleSubmit = async (
+    values: FormValues,
+    { resetForm, setSubmitting, setFieldError }: FormikHelpers<FormValues>,
+  ) => {
+    try {
+      const firebaseUser = await loginUser({
+        email: values.email,
+        password: values.password,
+      });
+
+      setUser({
+        email: firebaseUser.email,
+        displayName: firebaseUser.displayName || values.email.split("@")[0], 
+      });
+
+      resetForm();
+      if (onSuccess) onSuccess();
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Login failed";
+
+      if (
+        errorMessage.includes("invalid-credential") ||
+        errorMessage.includes("user-not-found") ||
+        errorMessage.includes("wrong-password")
+      ) {
+        setFieldError("email", "Неправильна пошта або пароль");
+        setFieldError("password", "Неправильна пошта або пароль");
+      } else {
+        console.error("Login error:", errorMessage);
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <Formik
@@ -47,7 +77,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
       validationSchema={LoginSchema}
       onSubmit={handleSubmit}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isSubmitting }) => (
         <Form className={css.form}>
           <div className={css.inputsContainer}>
             <div className={css.inputWrapper}>
@@ -65,7 +95,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
                 className={css.errorText}
               />
             </div>
-  
+
             <div className={css.inputWrapper}>
               <div className={css.passwordContainer}>
                 <Field
@@ -93,8 +123,12 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
             </div>
           </div>
 
-          <button type="submit" className={css.submitButton}>
-            Log In
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={css.submitButton}
+          >
+            {isSubmitting ? "Logging in..." : "Log In"}
           </button>
         </Form>
       )}

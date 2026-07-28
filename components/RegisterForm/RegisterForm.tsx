@@ -5,6 +5,8 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { LuEye } from "react-icons/lu";
 import { FiEyeOff } from "react-icons/fi";
+import { registerUser } from "@/services/authService";
+import { useAuthStore } from "@/lib/store/authStore";
 import css from "./RegisterForm.module.css";
 
 const RegisterSchema = Yup.object().shape({
@@ -31,18 +33,42 @@ interface FormValues {
 
 export default function RegisterForm({ onSuccess }: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: FormValues,
-    { resetForm }: FormikHelpers<FormValues>,
+    { resetForm, setSubmitting, setFieldError }: FormikHelpers<FormValues>,
   ) => {
-    console.log("Register form submitted values:", values);
-    resetForm();
-    if (onSuccess) onSuccess();
+    try {
+      const firebaseUser = await registerUser({
+        email: values.email,
+        password: values.password,
+        name: values.name,
+      });
+
+      setUser({
+        email: firebaseUser.email,
+        displayName: values.name,
+      });
+
+      resetForm();
+      if (onSuccess) onSuccess();
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Registration failed";
+
+      if (errorMessage.includes("email-already-in-use")) {
+        setFieldError("email", "Ця пошта вже використовується");
+      } else {
+        console.error("Firebase registration error:", errorMessage);
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -51,7 +77,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
       validationSchema={RegisterSchema}
       onSubmit={handleSubmit}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isSubmitting }) => (
         <Form className={css.form}>
           <div className={css.inputsContainer}>
             <div className={css.inputWrapper}>
@@ -113,8 +139,12 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
             </div>
           </div>
 
-          <button type="submit" className={css.submitButton}>
-            Sign Up
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={css.submitButton}
+          >
+            {isSubmitting ? "Signing up..." : "Sign Up"}
           </button>
         </Form>
       )}

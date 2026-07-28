@@ -65,12 +65,12 @@ font-weight: 500;
 
 .authList {
   display: flex;
- gap: 8px;
  margin-left: auto;
 }
 
 .authLogin {
   padding: 14px 39px;
+  margin-right: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,4 +97,37 @@ color: var(--main-white);
 .authRegister:focus,
 .authRegister:active {
   background-color : var(--dark-green);
+}
+
+.accAvatar {
+  border-radius: 10px;
+width: 40px;
+height: 40px;
+background-color: var(--green);
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--main-white);
+margin-right: 14px;
+}
+
+.authItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userName {
+  font-weight: 500;
+}
+
+.authItem:has(.authLogout) {
+  margin-left: 28px;
+}
+
+.authLogout {
+background-color: transparent;
+padding: 14px 39px;
+border: 1px solid rgba(25, 26, 21, 0.2);
+border-radius: 30px;
 }

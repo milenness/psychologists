@@ -4,17 +4,36 @@ import { useState } from "react";
 import css from "./PsychologistCard.module.css";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { Psychologist } from "@/types/psychologist";
+import { useAuthStore } from "@/lib/store/authStore";
 
 interface PsychologistCardProps {
-  psychologist: Psychologist;
+  psychologist: Psychologist & { id?: string; _id?: string };
 }
 
 export default function PsychologistCard({
   psychologist,
 }: PsychologistCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const { user, favorites, toggleFavorite } = useAuthStore();
+
+  const psychologistId = psychologist.id || psychologist._id || "";
+
+  const isFavorite = Boolean(user && favorites.includes(psychologistId));
+
+  const handleFavoriteClick = () => {
+    if (!user) {
+      alert(
+        "Будь ласка, увійдіть у систему, щоб додавати психологів в обрані!",
+      );
+      return;
+    }
+    if (psychologistId) {
+      toggleFavorite(psychologistId);
+    }
+  };
 
   const {
     name,
@@ -63,9 +82,16 @@ export default function PsychologistCard({
             <button
               type="button"
               className={css.favourite}
-              aria-label="Add to favorites"
+              onClick={handleFavoriteClick}
+              aria-label={
+                isFavorite ? "Remove from favorites" : "Add to favorites"
+              }
             >
-              <FaRegHeart size={26} />
+              {isFavorite ? (
+                <FaHeart size={26} style={{ color: "var(--green)" }} />
+              ) : (
+                <FaRegHeart size={26} />
+              )}
             </button>
           </div>
         </div>

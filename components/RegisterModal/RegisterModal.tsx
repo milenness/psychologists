@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, MouseEvent } from "react";
 import { createPortal } from "react-dom";
 import css from "./RegisterModal.module.css";
 import { IoCloseOutline } from "react-icons/io5";
@@ -11,7 +11,7 @@ interface ModalProps {
 }
 
 export default function RegisterModal({ onClose }: ModalProps) {
-  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
@@ -53,7 +53,7 @@ export default function RegisterModal({ onClose }: ModalProps) {
           information.
         </p>
 
-      <RegisterForm onSuccess={onClose} />
+        <RegisterForm onSuccess={onClose} />
       </div>
     </div>,
     document.body,
