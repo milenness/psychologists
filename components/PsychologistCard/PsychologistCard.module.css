@@ -1,10 +1,20 @@
 .card {
   padding: 24px;
   background-color: var(--main-white);
+  border-radius: 24px;
   display: flex;
   gap: 24px;
-  border-radius: 24px;
-  width: 1184px;
+}
+
+.topInfo {
+  display: flex;
+  justify-content: space-between;
+margin-bottom: 24px;
+}
+
+.CardAvatar {
+  border-radius: 15px;
+
 }
 
 .imgWrapper {
@@ -12,12 +22,14 @@
   border: 2px solid rgba(84, 190, 150, 0.2);
 border-radius: 30px;
 padding: 10px;
+width: 120px;
+height: 120px;
 }
 
 .online {
   position: absolute;
-  top: 9px;
-  right: 14px;
+  top: 6px;
+  right: 10px;
   width: 14px;
   height: 14px;
   border-radius: 100%;
@@ -25,12 +37,6 @@ background-color: #38cd3e;
 border: 2.33px solid var(--main-white);
 }
 
-.contentWrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  width: 100%;
-}
 
 .nameWrapper {
   display: flex;
@@ -50,11 +56,29 @@ font-size: 24px;
 line-height: 1;
 }
 
+.ratingWrapper {
+display: flex;
+}
+
 .rating {
+  position: relative;
   margin-right: 32px;
   font-weight: 500;
 line-height: 1.5;
 }
+
+.rating::after {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  background-color: rgba(25, 26, 21, 0.2);
+  right: -16px;
+  top: 4px;
+  vertical-align: middle; 
+}
+
 .star {
   color: #ffc531;
   margin-right: 8px;
@@ -64,4 +88,120 @@ line-height: 1.5;
 margin-right: 28px;
   font-weight: 500;
 line-height: 1.5;
+}
+
+.eccent {
+  color: #38cd3e;
+}
+
+.favourite {
+  display: inline-flex;
+ padding: 0;
+  background-color: transparent;
+}
+
+.bottomInfo {
+  max-width: 992px;
+}
+
+.skillsList {
+  display: flex;
+  row-gap: 8px;
+  column-gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  max-width: 844px;
+}
+
+.skillItem {
+  padding: 8px 16px;
+  font-weight: 500;
+line-height: 1.5;
+border-radius: 24px;
+background-color: #f3f3f3;
+}
+
+.skillName {
+  color: #8a8a89;
+}
+
+.description {
+  color: rgba(25, 26, 21, 0.5);
+}
+
+.readMore {
+  margin-top: 14px;
+  background-color: transparent;
+  font-weight: 500;
+line-height: 1.5;
+text-decoration: underline;
+padding: 0;
+}
+
+.additionalContent {
+  margin-top: 48px;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.accInfo {
+  display: flex;
+  gap: 12px;
+}
+
+.letter {
+  border-radius: 100px;
+font-weight: 500;
+font-size: 20px;
+line-height: 1;
+color: var(--green);
+background-color: rgba(84, 190, 150, 0.2);
+width: 44px;
+height: 44px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.accName {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.ratingNumber {
+  display: flex;
+  font-weight: 500;
+font-size: 14px;
+line-height: 1.29;
+}
+
+.comentText {
+  color: rgba(25, 26, 21, 0.5);
+}
+
+.appointment {
+  display: inline-flex;
+  padding: 14px 32px;
+  font-weight: 500;
+color: var(--main-white);
+border-radius: 30px;
+background-color: var(--green);
+transition: background-color var(--main-transition);
+}
+
+.appointment:hover,
+.appointment:focus,
+.appointment:active {
+  background-color : var(--dark-green);
 }

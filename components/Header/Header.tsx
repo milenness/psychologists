@@ -4,7 +4,6 @@ import css from "./Header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// Описуємо, що приймає Header
 interface HeaderProps {
   onOpenLoginModal: () => void;
   onOpenRegisterModal: () => void;

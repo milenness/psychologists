@@ -1,0 +1,29 @@
+.section {
+padding: 64px 0 100px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 64px;
+}
+
+.loadMoreBtn {
+    padding: 14px 48px;
+    font-weight: 500;
+color: var(--main-white);
+border-radius: 30px;
+background-color:var(--green);
+}
+
+.loadMoreBtn:hover,
+.loadMoreBtn:focus,
+.loadMoreBtn:active {
+  background-color : var(--dark-green);
+}

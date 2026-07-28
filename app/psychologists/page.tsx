@@ -1,7 +1,9 @@
-import PsychologistCard from "@/components/PsychologistCard";
+import PsychologistsList from "@/components/PsychologistsList";
 
-export default function Home() {
+export default function Psychologists() {
   return (
-      <PsychologistCard />
+    <div className="container">
+      <PsychologistsList />
+    </div>
   );
 }
