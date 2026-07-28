@@ -33,7 +33,7 @@ export default function Header({
             </li>
 
             <li
-              className={`${css.navItem} ${pathname === "/catalog" ? css.active : ""}`}
+              className={`${css.navItem} ${pathname === "/psychologists" ? css.active : ""}`}
             >
               <Link
                 href="/psychologists"

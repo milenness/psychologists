@@ -15,6 +15,7 @@ export default function PsychologistsList() {
   const [visibleCount, setVisibleCount] = useState<number>(ITEMS_PER_PAGE);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // Стейт для обраного критерію сортування
   const [filter, setFilter] = useState<string>("asc");
 
   useEffect(() => {
@@ -36,31 +37,39 @@ export default function PsychologistsList() {
     setVisibleCount((prevCount) => prevCount + ITEMS_PER_PAGE);
   };
 
-  const getFilteredAndSortedPsychologists = () => {
-    let result = [...psychologists];
+  // Сортування масиву (картки не зникають, лише міняють порядок)
+  const getSortedPsychologists = () => {
+    const result = [...psychologists]; // Змінили let на const
 
-    if (filter === "less_10") {
-      result = result.filter((item) => item.price_per_hour < 100);
-    } else if (filter === "greater_10") {
-      result = result.filter((item) => item.price_per_hour >= 100);
-    } else if (filter === "popular") {
-      result = result.filter((item) => item.rating >= 4.8);
-    } else if (filter === "not_popular") {
-      result = result.filter((item) => item.rating < 4.8);
-    }
-
-    if (filter === "asc") {
-      result.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (filter === "desc") {
-      result.sort((a, b) => b.name.localeCompare(a.name));
+    switch (filter) {
+      case "asc": // A to Z
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "desc": // Z to A
+        result.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "less_10": // Від найнижчої ціни
+        result.sort((a, b) => a.price_per_hour - b.price_per_hour);
+        break;
+      case "greater_10": // Від найвищої ціни
+        result.sort((a, b) => b.price_per_hour - a.price_per_hour);
+        break;
+      case "popular": // Від найвищого рейтингу
+        result.sort((a, b) => b.rating - a.rating);
+        break;
+      case "not_popular": // Від найнижчого рейтингу
+        result.sort((a, b) => a.rating - b.rating);
+        break;
+      default:
+        break;
     }
 
     return result;
   };
 
-  const filteredPsychologists = getFilteredAndSortedPsychologists();
-  const visiblePsychologists = filteredPsychologists.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredPsychologists.length;
+  const sortedPsychologists = getSortedPsychologists();
+  const visiblePsychologists = sortedPsychologists.slice(0, visibleCount);
+  const hasMore = visibleCount < sortedPsychologists.length;
 
   if (isLoading) {
     return <Loader />;

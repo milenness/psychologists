@@ -57,7 +57,7 @@ export default function Hero() {
             psychologists.
           </p>
           <Link
-            href="/catalog"
+            href="/psychologists"
             className={css.link}
             aria-label="View psychologists list"
           >
