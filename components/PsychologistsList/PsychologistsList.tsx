@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from "react";
 import PsychologistCard from "@/components/PsychologistCard";
@@ -44,14 +44,14 @@ export default function PsychologistsList({
     setVisibleCount((prevCount) => prevCount + ITEMS_PER_PAGE);
   };
 
- const baseList = isFavoritesOnly
-   ? psychologists.filter(
-       (psychologist: Psychologist & { id?: string; _id?: string }) => {
-         const psychologistId = psychologist.id || psychologist._id || "";
-         return favorites.includes(psychologistId);
-       },
-     )
-   : psychologists;
+  const baseList = isFavoritesOnly
+    ? psychologists.filter(
+        (psychologist: Psychologist & { id?: string; _id?: string }) => {
+          const psychologistId = psychologist.id || psychologist._id || "";
+          return favorites.includes(psychologistId);
+        },
+      )
+    : psychologists;
 
   const getSortedPsychologists = () => {
     const result = [...baseList];
@@ -108,7 +108,9 @@ export default function PsychologistsList({
           <ul className={css.list}>
             {visiblePsychologists.map((psychologist, index) => (
               <li key={index}>
-                <PsychologistCard psychologist={psychologist} />
+                <PsychologistCard
+                  psychologist={psychologist}
+                />
               </li>
             ))}
           </ul>

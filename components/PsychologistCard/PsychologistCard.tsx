@@ -7,7 +7,8 @@ import { FaStar } from "react-icons/fa6";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { Psychologist } from "@/types/psychologist";
 import { useAuthStore } from "@/lib/store/authStore";
-import AppointmentModal from "@/components/AppointmentModal/AppointmentModal"; // Шлях може відрізнятися в залежності від твоєї структури папок
+import AppointmentModal from "@/components/AppointmentModal/AppointmentModal";
+import ErrorWhileSavingModal from "@/components/ErrorWhileSavingModal/ErrorWhileSavingModal";
 
 interface PsychologistCardProps {
   psychologist: Psychologist & { id?: string; _id?: string };
@@ -17,19 +18,17 @@ export default function PsychologistCard({
   psychologist,
 }: PsychologistCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Стейт для відкриття модалки
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
   const { user, favorites, toggleFavorite } = useAuthStore();
 
   const psychologistId = psychologist.id || psychologist._id || "";
-
   const isFavorite = Boolean(user && favorites.includes(psychologistId));
 
   const handleFavoriteClick = () => {
     if (!user) {
-      alert(
-        "Будь ласка, увійдіть у систему, щоб додавати психологів в обрані!",
-      );
+      setIsErrorModalOpen(true);
       return;
     }
     if (psychologistId) {
@@ -39,7 +38,7 @@ export default function PsychologistCard({
 
   const handleOpenAppointment = () => {
     if (!user) {
-      alert("Будь ласка, увійдіть у систему, щоб записатися до психолога!");
+      setIsErrorModalOpen(true);
       return;
     }
     setIsModalOpen(true);
@@ -61,6 +60,7 @@ export default function PsychologistCard({
   return (
     <>
       <div className={css.card}>
+        {/* Твоя розмітка картки залишається без змін */}
         <div className={css.imgWrapper}>
           <Image
             src={avatar_url || "/Default.png"}
@@ -161,7 +161,6 @@ export default function PsychologistCard({
                   ))}
                 </ul>
 
-                {/* Кнопка виклику модалки */}
                 <button
                   type="button"
                   className={css.appointment}
@@ -182,6 +181,12 @@ export default function PsychologistCard({
           avatar_url={avatar_url}
         />
       )}
+
+    
+      <ErrorWhileSavingModal
+        isOpen={isErrorModalOpen}
+        onClose={() => setIsErrorModalOpen(false)}
+      />
     </>
   );
 }

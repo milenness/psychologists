@@ -28,15 +28,14 @@ height: 120px;
 
 .online {
   position: absolute;
-  top: 6px;
-  right: 10px;
+  top: 7px;
+  right: 12px;
   width: 14px;
   height: 14px;
   border-radius: 100%;
 background-color: #38cd3e;
 border: 2.33px solid var(--main-white);
 }
-
 
 .nameWrapper {
   display: flex;
