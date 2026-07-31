@@ -19,7 +19,7 @@
 * **Framework:** Next.js (App Router)
 * **Language:** TypeScript
 * **Backend & Database:** Firebase (Authentication & Realtime Database)
-* **Form Management & Validation:** React Hook Form & Yup
+* **Form Management & Validation:** Formik & Yup
 * **Styling:** CSS Modules
 * **Key Libraries:** Axios (for API requests), React Icons, React Hot Toast
 * **Deployment:** Vercel
