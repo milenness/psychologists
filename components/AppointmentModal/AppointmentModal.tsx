@@ -2,6 +2,7 @@
 
 import { useEffect, MouseEvent } from "react";
 import { createPortal } from "react-dom";
+import toast from "react-hot-toast";
 import css from "./AppointmentModal.module.css";
 import { IoCloseOutline } from "react-icons/io5";
 import AppointmentForm from "../AppointmentForm";
@@ -39,6 +40,11 @@ export default function AppointmentModal({
       document.body.style.overflow = "";
     };
   }, [onClose]);
+
+  const handleSuccess = () => {
+    toast.success("Your application has been successfully sent!");
+    onClose();
+  };
 
   if (typeof window === "undefined") return null;
 
@@ -79,7 +85,7 @@ export default function AppointmentModal({
           </div>
         </div>
 
-        <AppointmentForm onSuccess={onClose} />
+        <AppointmentForm onSuccess={handleSuccess} psychologistName={name} />
       </div>
     </div>,
     document.body,

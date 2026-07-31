@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { LuClock } from "react-icons/lu";
+import { createAppointment } from "@/services/api";
 import css from "./AppointmentForm.module.css";
 
 const AppointmentSchema = Yup.object().shape({
@@ -17,14 +18,12 @@ const AppointmentSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  comment: Yup.string()
-    .min(10, "Comment must be at least 10 characters")
-    .max(300, "Comment must be at most 300 characters")
-    .required("Comment is required"),
+  comment: Yup.string().required("Comment is required"),
 });
 
 interface AppointmentFormProps {
   onSuccess?: () => void;
+  psychologistName?: string;
 }
 
 interface FormValues {
@@ -49,7 +48,10 @@ const generateTimeSlots = () => {
 
 const TIME_SLOTS = generateTimeSlots();
 
-export default function AppointmentForm({ onSuccess }: AppointmentFormProps) {
+export default function AppointmentForm({
+  onSuccess,
+  psychologistName,
+}: AppointmentFormProps) {
   const [isTimeOpen, setIsTimeOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -73,7 +75,12 @@ export default function AppointmentForm({ onSuccess }: AppointmentFormProps) {
     { resetForm, setSubmitting }: FormikHelpers<FormValues>,
   ) => {
     try {
-      console.log("Appointment data:", values);
+      await createAppointment({
+        ...values,
+        psychologistName: psychologistName || "Unknown",
+      });
+
+      console.log("Appointment successfully saved to Firebase!");
       resetForm();
       if (onSuccess) onSuccess();
     } catch (error) {
@@ -201,6 +208,7 @@ export default function AppointmentForm({ onSuccess }: AppointmentFormProps) {
               </div>
             </div>
 
+            {/* Email */}
             <div className={css.inputWrapper}>
               <Field
                 type="email"

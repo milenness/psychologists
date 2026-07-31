@@ -11,12 +11,34 @@ export async function fetchPsychologists() {
     );
     if (!response.data) return [];
 
-    return Object.entries(response.data).map(([id, item]) => ({
-      id,
-      ...item,
-    }));
+    return Object.entries(response.data)
+      .filter(([id]) => id !== "appointments")
+      .map(([id, item]) => ({
+        id,
+        ...item,
+      }));
   } catch (error) {
     console.error("Error fetching psychologists:", error);
+    throw error;
+  }
+}
+
+export async function createAppointment(appointmentData: {
+  name: string;
+  phone: string;
+  time: string;
+  email: string;
+  comment: string;
+  psychologistName: string;
+}) {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/appointments.json`,
+      appointmentData,
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error creating appointment:", error);
     throw error;
   }
 }

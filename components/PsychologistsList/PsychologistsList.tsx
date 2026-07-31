@@ -8,7 +8,7 @@ import css from "./PsychologistsList.module.css";
 import Loader from "../Loader";
 import CustomSelect from "../CustomSelect";
 import { useAuthStore } from "@/lib/store/authStore";
-import Image from "next/image";
+import { FaHeartCircleXmark } from "react-icons/fa6";
 
 const ITEMS_PER_PAGE = 3;
 
@@ -54,34 +54,34 @@ export default function PsychologistsList({
       )
     : psychologists;
 
-  const getSortedPsychologists = () => {
-    const result = [...baseList];
+const getSortedPsychologists = () => {
+  const result = [...baseList];
 
-    switch (filter) {
-      case "asc":
-        result.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case "desc":
-        result.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      case "less_10":
-        result.sort((a, b) => a.price_per_hour - b.price_per_hour);
-        break;
-      case "greater_10":
-        result.sort((a, b) => b.price_per_hour - a.price_per_hour);
-        break;
-      case "popular":
-        result.sort((a, b) => b.rating - a.rating);
-        break;
-      case "not_popular":
-        result.sort((a, b) => a.rating - b.rating);
-        break;
-      default:
-        break;
-    }
+  switch (filter) {
+    case "asc":
+      result.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+      break;
+    case "desc":
+      result.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
+      break;
+    case "less_10":
+      result.sort((a, b) => a.price_per_hour - b.price_per_hour);
+      break;
+    case "greater_10":
+      result.sort((a, b) => b.price_per_hour - a.price_per_hour);
+      break;
+    case "popular":
+      result.sort((a, b) => b.rating - a.rating);
+      break;
+    case "not_popular":
+      result.sort((a, b) => a.rating - b.rating);
+      break;
+    default:
+      break;
+  }
 
-    return result;
-  };
+  return result;
+};
 
   const sortedPsychologists = getSortedPsychologists();
   const visiblePsychologists = sortedPsychologists.slice(0, visibleCount);
@@ -103,18 +103,12 @@ export default function PsychologistsList({
       {isFavoritesOnly && baseList.length === 0 ? (
         <div className={css.emptyContainer}>
           <div className={css.emptyImageWrapper}>
-            <Image
-              src="/Heart.webp"
-              alt="Empty favorites"
-              width={200}
-              height={200}
-              priority
-            />
+            <FaHeartCircleXmark className={css.heartIcon} size={200} />
           </div>
           <h3 className={css.emptyTitle}>No favorite psychologists yet</h3>
           <p className={css.emptyText}>
-            You haven&apos;t added any psychologists to your favorites list. Explore
-            our specialists and click the heart icon to save them here.
+            You haven&apos;t added any psychologists to your favorites list.
+            Explore our specialists and click the heart icon to save them here.
           </p>
         </div>
       ) : (

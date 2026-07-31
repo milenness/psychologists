@@ -48,7 +48,7 @@ export default function PsychologistCard({
     name,
     avatar_url,
     experience,
-    reviews,
+    reviews = [],
     price_per_hour,
     rating,
     license,
@@ -60,12 +60,11 @@ export default function PsychologistCard({
   return (
     <>
       <div className={css.card}>
-        {/* Твоя розмітка картки залишається без змін */}
         <div className={css.imgWrapper}>
           <Image
             src={avatar_url || "/Default.png"}
-            className={css.CardAvatar}
-            alt={name}
+            className={css.cardAvatar}
+            alt={name || "Psychologist"}
             width={96}
             height={96}
             priority
@@ -182,7 +181,6 @@ export default function PsychologistCard({
         />
       )}
 
-    
       <ErrorWhileSavingModal
         isOpen={isErrorModalOpen}
         onClose={() => setIsErrorModalOpen(false)}
