@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import PsychologistCard from "@/components/PsychologistCard";
@@ -8,6 +8,7 @@ import css from "./PsychologistsList.module.css";
 import Loader from "../Loader";
 import CustomSelect from "../CustomSelect";
 import { useAuthStore } from "@/lib/store/authStore";
+import Image from "next/image";
 
 const ITEMS_PER_PAGE = 3;
 
@@ -100,17 +101,28 @@ export default function PsychologistsList({
       )}
 
       {isFavoritesOnly && baseList.length === 0 ? (
-        <p style={{ textAlign: "center", marginTop: "40px", fontSize: "18px" }}>
-          У вас поки немає обраних психологів.
-        </p>
+        <div className={css.emptyContainer}>
+          <div className={css.emptyImageWrapper}>
+            <Image
+              src="/Heart.webp"
+              alt="Empty favorites"
+              width={200}
+              height={200}
+              priority
+            />
+          </div>
+          <h3 className={css.emptyTitle}>No favorite psychologists yet</h3>
+          <p className={css.emptyText}>
+            You haven&apos;t added any psychologists to your favorites list. Explore
+            our specialists and click the heart icon to save them here.
+          </p>
+        </div>
       ) : (
         <>
           <ul className={css.list}>
             {visiblePsychologists.map((psychologist, index) => (
               <li key={index}>
-                <PsychologistCard
-                  psychologist={psychologist}
-                />
+                <PsychologistCard psychologist={psychologist} />
               </li>
             ))}
           </ul>

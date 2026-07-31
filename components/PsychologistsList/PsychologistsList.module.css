@@ -27,3 +27,28 @@ background-color:var(--green);
 .loadMoreBtn:active {
   background-color : var(--dark-green);
 }
+
+.emptyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 80px;
+  padding: 0 20px;
+}
+
+.emptyImageWrapper {
+  margin-bottom: 24px;
+}
+
+.emptyTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.emptyText {
+  max-width: 500px;
+  line-height: 1.5;
+}
